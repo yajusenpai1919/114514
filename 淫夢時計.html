@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>yajuClock</title>
+  <style>
+    body {
+      background: #f6f6f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .clock {
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      font-size: 180px;
+      font-weight: 400;
+      letter-spacing: 5px;
+      display: flex;
+      align-items: center;
+      margin-top: 24px;
+    }
+    .clock .hour { color: #880e13; }
+    .clock .colon { color: #111; margin: 0 10px; }
+    .clock .minute { color: #194c1f; }
+    .clock .second { color: #3e4e6c; }
+    #full-img-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #000;
+      display: none;
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    #full-img-overlay img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      background: #000;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    @media (max-width: 800px) {
+      .clock { font-size: 12vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <span class="hour">00</span>
+    <span class="colon">:</span>
+    <span class="minute">00</span>
+    <span class="colon">:</span>
+    <span class="second">00</span>
+  </div>
+  <div id="full-img-overlay">
+    <img src="your-image.jpg" alt="Full Image">
+  </div>
+  <audio id="audio" src="音声だけ.mp4"></audio>
+  <video id="minute-sound" src="やりますねぇ.mp4" type="video/mp4" style="display:none" preload="auto"></video>
+  <script>
+    // 時計部分
+    function pad(n) { return n < 10 ? '0' + n : n; }
+    let lastMinute = null;
+    function updateClock() {
+      const now = new Date();
+      const h = pad(now.getHours());
+      const m = pad(now.getMinutes());
+      const s = pad(now.getSeconds());
+      document.querySelector('.hour').textContent = h;
+      document.querySelector('.minute').textContent = m;
+      document.querySelector('.second').textContent = s;
+
+      // 分が変わったら音声再生
+      if (lastMinute !== null && m !== lastMinute) {
+        const video = document.getElementById('minute-sound');
+        video.currentTime = 0;
+        video.play();
+      }
+      lastMinute = m;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 画像フルスクリーン表示と3秒後に消す
+    function showFullImage3s() {
+      const overlay = document.getElementById('full-img-overlay');
+      overlay.style.display = 'flex';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 3000);
+    }
+
+    // 複数時刻で音声再生
+    const targetTimes = ["08:10:00", "11:45:14"];
+    let triggeredTimes = {};
+
+    function triggerDisplayAndAudio(time) {
+      // 11:45:14のときだけ画像も表示、それ以外は音声だけ
+      if(time === "11:45:14") showFullImage3s();
+      const audio = document.getElementById('audio');
+      audio.currentTime = 0;
+      audio.play();
+      triggeredTimes[time] = true;
+    }
+
+    function checkTimeAndTrigger() {
+      const now = new Date();
+      const hh = now.getHours().toString().padStart(2, '0');
+      const mm = now.getMinutes().toString().padStart(2, '0');
+      const ss = now.getSeconds().toString().padStart(2, '0');
+      const current = `${hh}:${mm}:${ss}`;
+      if (targetTimes.includes(current) && !triggeredTimes[current]) {
+        triggerDisplayAndAudio(current);
+      }
+    }
+    setInterval(checkTimeAndTrigger, 500);
+
+    // 音声の再生許可
+    document.body.addEventListener('click', function enableAudio() {
+      document.getElementById('minute-sound').play().catch(()=>{});
+      document.getElementById('minute-sound').pause();
+      document.getElementById('audio').play().catch(()=>{});
+      document.getElementById('audio').pause();
+      document.body.removeEventListener('click', enableAudio);
+    });
+  </script>
+</body>
+</html>

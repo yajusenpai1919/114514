@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>また淫夢厨を発掘しました</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+        }
+        .bg-left {
+            position: absolute;
+            top: 0; left: 0; width: 50vw; height: 50vh;
+            background: #a0aba4;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+        .bg-right {
+            position: absolute;
+            top: 0; right: 0; width: 50vw; height: 50vh;
+            background: #d2c9bd;
+            clip-path: polygon(100% 0, 100% 100%, 0 0);
+        }
+        .bg-bottom {
+            position: absolute;
+            bottom: 0; left: 0; width: 100vw; height: 60vh;
+            background: #3a3139;
+            clip-path: polygon(0 100%, 100% 100%, 50% 0);
+        }
+        .bg-circle {
+            position: absolute;
+            left: 50%;
+            top: 40vh;
+            transform: translate(-50%, -50%);
+            width: 210px;
+            height: 210px;
+            background: #a67771;
+            border-radius: 50%;
+            border: 10px solid #f6f6f6;
+            z-index: 2;
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            margin: 0 auto;
+            padding-top: 90px;
+            text-align: left;
+        }
+        h1 {
+            color: #f6f6f6;
+            font-size: 2.2em;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 0.3em;
+            margin-bottom: 1em;
+            text-shadow: 1px 2px 8px #000a;
+        }
+        .small-text {
+            font-size: 0.95em;
+            margin-top: 1.7em;
+        }
+        .black-text {
+            color: #181818;
+            background: rgba(255,255,255,0.85);
+            padding: 0.2em 0.4em;
+            border-radius: 0.3em;
+            font-weight: bold;
+            background-image: none;
+            text-shadow: none;
+        }
+        .underline {
+            border-bottom: 2px solid #448aff;
+            text-decoration: none;
+        }
+        .link-area {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            margin: 70px auto 0 auto;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .link-area a {
+            color: #fff;
+            background: #3a3139;
+            padding: 0.5em 1.2em;
+            border-radius: 0.45em;
+            font-size: 1.12em;
+            text-decoration: none;
+            box-shadow: 0 2px 8px #2228;
+            margin-top: 0.5em;
+            transition: background 0.2s, color 0.2s;
+        }
+        .link-area a:hover {
+            background: #a67771;
+            color: #fffbe8;
+        }
+        .footer {
+            width: 100vw;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 20;
+            text-align: center;
+            color: #eee;
+            font-size: 1em;
+            padding: 10px 0 10px 0;
+            background: rgba(34, 34, 34, 0.13);
+            letter-spacing: 0.2em;
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="bg-left"></div>
+        <div class="bg-right"></div>
+        <div class="bg-bottom"></div>
+        <div class="bg-circle"></div>
+    </div>
+    <div class="content">
+        <h1>また淫夢厨を発掘しました</h1>
+        <div class="small-text">
+            <span class="black-text">
+              homoはアドレスバーにも
+              <span class="underline">淫夢語録</span>
+              を入力します
+            </span>
+        </div>
+    </div>
+    <div class="link-area">
+        <a href="淫夢時計.html" target="_blank">淫夢時計を表示する</a>
+    </div>
+    <div class="footer">
+        ©️野獣先輩
+    </div>
+</body>
+</html>
